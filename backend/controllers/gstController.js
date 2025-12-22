@@ -1,6 +1,4 @@
-// @desc    Calculate GST
-// @route   POST /api/gst/calculate
-// @access  Public
+
 const calculateGST = (req, res) => {
     const { amount, rate } = req.body;
 
