@@ -10,9 +10,7 @@ const isAdmin = (req, res, next) => {
     }
 };
 
-// @desc    Get all users
-// @route   GET /api/admin/users
-// @access  Private/Admin
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await User.find({}).select('-password');
@@ -22,9 +20,7 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-// @desc    Delete user
-// @route   DELETE /api/admin/users/:id
-// @access  Private/Admin
+
 const deleteUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -40,9 +36,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
-// @desc    Get all invoices
-// @route   GET /api/admin/invoices
-// @access  Private/Admin
+
 const getAllInvoices = async (req, res) => {
     try {
         const invoices = await Invoice.find({});
@@ -52,9 +46,7 @@ const getAllInvoices = async (req, res) => {
     }
 };
 
-// @desc    Delete invoice
-// @route   DELETE /api/admin/invoices/:id
-// @access  Private/Admin
+
 const deleteInvoice = async (req, res) => {
     try {
         const invoice = await Invoice.findById(req.params.id);

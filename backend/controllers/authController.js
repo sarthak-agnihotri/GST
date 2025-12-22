@@ -9,9 +9,7 @@ const generateToken = (id) => {
     });
 };
 
-// @desc    Register new user
-// @route   POST /api/auth/register
-// @access  Public
+
 const register = async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -65,9 +63,6 @@ const register = async (req, res) => {
     }
 };
 
-// @desc    Authenticate a user
-// @route   POST /api/auth/login
-// @access  Public
 const login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -95,9 +90,6 @@ const login = async (req, res) => {
     }
 };
 
-// @desc    Get current user profile
-// @route   GET /api/auth/profile
-// @access  Private
 const getMe = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -127,9 +119,7 @@ const getMe = async (req, res) => {
     }
 };
 
-// @desc    Update user profile
-// @route   PUT /api/auth/profile
-// @access  Private
+
 const updateDetails = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -223,9 +213,6 @@ const updateDetails = async (req, res) => {
     }
 };
 
-// @desc    Make user an admin (Admin Only)
-// @route   PUT /api/auth/promote/:id
-// @access  Private/Admin
 const promoteUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -248,9 +235,7 @@ const promoteUser = async (req, res) => {
     }
 };
 
-// @desc    Enable admin access for development (Self-Service)
-// @route   PUT /api/auth/enable-admin
-// @access  Private
+
 const enableAdmin = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
