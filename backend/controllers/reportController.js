@@ -1,8 +1,6 @@
 const Invoice = require('../models/Invoice');
 
-// @desc    Get monthly GST report
-// @route   GET /api/reports/monthly
-// @access  Private
+
 const getMonthlyReport = async (req, res) => {
     try {
         const currentYear = new Date().getFullYear();
@@ -53,9 +51,7 @@ const getMonthlyReport = async (req, res) => {
     }
 };
 
-// @desc    Get yearly GST report
-// @route   GET /api/reports/yearly
-// @access  Private
+
 const getYearlyReport = async (req, res) => {
     try {
         const invoices = await Invoice.find({ user: req.user.id });
@@ -87,9 +83,7 @@ const getYearlyReport = async (req, res) => {
 
 const { generateReportPDF } = require('../utils/pdfGenerator');
 
-// @desc    Export GST report as PDF
-// @route   GET /api/reports/export-pdf
-// @access  Private
+
 const exportReportPDF = async (req, res) => {
     const { type } = req.query; // 'monthly' or 'yearly'
 
