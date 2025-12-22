@@ -1,8 +1,6 @@
 const Invoice = require('../models/Invoice');
 
-// @desc    Get all invoices
-// @route   GET /api/invoices
-// @access  Private
+
 const getInvoices = async (req, res) => {
     try {
         const invoices = await Invoice.find({ user: req.user.id })
@@ -14,9 +12,7 @@ const getInvoices = async (req, res) => {
     }
 };
 
-// @desc    Create new invoice
-// @route   POST /api/invoices
-// @access  Private
+
 const createInvoice = async (req, res) => {
     const { customerName, items, totalAmount } = req.body;
 
@@ -72,9 +68,6 @@ const createInvoice = async (req, res) => {
     }
 };
 
-// @desc    Get invoice by ID
-// @route   GET /api/invoices/:id
-// @access  Private
 const getInvoiceById = async (req, res) => {
     try {
         // Validate ObjectId format
@@ -100,9 +93,6 @@ const getInvoiceById = async (req, res) => {
     }
 };
 
-// @desc    Delete invoice
-// @route   DELETE /api/invoices/:id
-// @access  Private
 const deleteInvoice = async (req, res) => {
     try {
         // Validate ObjectId format
@@ -125,36 +115,34 @@ const deleteInvoice = async (req, res) => {
         } else {
             userId = String(invoice.user);
         }
-        
+
         if (userId !== req.user.id && req.user.role !== 'admin') {
             return res.status(403).json({ message: 'User not authorized to delete this invoice' });
         }
 
         // Use findByIdAndDelete instead of remove (which is deprecated)
         const deletedInvoice = await Invoice.findByIdAndDelete(req.params.id);
-        
+
         if (!deletedInvoice) {
             return res.status(404).json({ message: 'Invoice not found or already deleted' });
         }
 
         console.log('Invoice deleted successfully:', req.params.id);
-        res.status(200).json({ 
-            id: req.params.id, 
+        res.status(200).json({
+            id: req.params.id,
             message: 'Invoice deleted successfully',
-            success: true 
+            success: true
         });
     } catch (error) {
         console.error('Delete invoice error:', error);
-        res.status(500).json({ 
+        res.status(500).json({
             message: error.message || 'Internal server error while deleting invoice',
             error: process.env.NODE_ENV === 'development' ? error.stack : undefined
         });
     }
 };
 
-// @desc    Update invoice
-// @route   PUT /api/invoices/:id
-// @access  Private
+
 const updateInvoice = async (req, res) => {
     try {
         // Validate ObjectId format
@@ -222,9 +210,7 @@ const updateInvoice = async (req, res) => {
     }
 };
 
-// @desc    Export invoice as Excel
-// @route   GET /api/invoices/:id/export-excel
-// @access  Private
+
 const exportInvoiceExcel = async (req, res) => {
     try {
         // Validate ObjectId format
