@@ -12,7 +12,14 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://gst-rust.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+app.options("*", cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
